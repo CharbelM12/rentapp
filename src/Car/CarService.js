@@ -69,10 +69,11 @@ class CarService{
            } 
         }
     ])
-    if (!car){
-        throw {status:errorhandler["CarNotFound"].status,message: errorhandler["CarNotFound"].message}
-        }
-        return car[0]    
+    if (car && car.length >0){
+        return category[0]   
+    }else {
+        throw {status:errorhandler['CarNotFound'].status , message: errorhandler['CarNotFound'].message}
+    }    
     };
     async updateCar(CarId,reqbody){
       console.log(reqbody)

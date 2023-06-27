@@ -55,10 +55,11 @@ class CategoryService{
            } 
         }
     ])
-        if (!category){
+    if (category && category.length >0){
+        return category[0]   
+    }else {
         throw {status:errorhandler['CategoryNotFound'].status , message: errorhandler['CategoryNotFound'].message}
-        }
-        return category[0]    
+    }  
     };
     async updateCategory(CategoryId,reqbody){
       console.log(reqbody)

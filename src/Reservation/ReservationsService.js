@@ -23,7 +23,7 @@ class ReservationService{
         const reservation = await Reservation.findOne({
          car:CarId,
           $or: [
-            { enddate: { $gte: startdate, $lt:enddate } },
+            { startdate: { $lt: enddate }, enddate: { $gt: startdate } },
             { startdate: { $gte: startdate, $lt:enddate } }
          ]
         })
@@ -95,7 +95,11 @@ class ReservationService{
            } 
         }
     ])
-        return reservation[0]    
+    if (reservation && reservation.length >0){
+        return reservation[0]   
+    }else {
+        throw {status:errorhandler['ReservationNotFound'].status , message: errorhandler['ReservationNotFound'].message}
+    } 
     };
     async updateReservation(ReservationId,reqbody,userId){
         const CarId=reqbody.CarId
