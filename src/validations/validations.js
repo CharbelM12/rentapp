@@ -5,7 +5,6 @@ const Brand=require('../Brand/BrandModel');
 const errorhandler=require('../errors');
 let date=new Date();
 
-
 const JoiValidation={
 
     signupvalidation:{
@@ -43,11 +42,12 @@ const JoiValidation={
     createorupdateBrandValidator:{
         body: Joi.object({
             name:Joi.string().custom(async (value, { req }) => {
-                try{
-                return await Brand.findOne({ name: value })
-                }catch(error){
-                    next({status:errorhandler['NameExists'].status,message: errorhandler['NameExists'].message})
-                }
+                
+               const  brand =await Brand.findOne({ name: value })
+               if (brand){
+                    throw {status:errorhandler['NameExists'].status,message: errorhandler['NameExists'].message}
+               }
+               return brand
                   
               }).required(),
             Country:Joi.string().required(),

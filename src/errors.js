@@ -1,6 +1,6 @@
 module.exports={
     ValidationError:{
-        status:422,
+        status:400,
         message:"Validation Failed"
     },
     EmailMissing:{

@@ -4,7 +4,8 @@ const bodyParser=require('body-parser')
 const config=require('./configurations/config');
 const errorhandler=require('./src/middleware/Errorhandler');
 const globalRoutes=require('./Global-routes');
-const deletereservations=require('./src/middleware/deletereservations')
+const deletereservations=require('./src/middleware/deletereservations');
+const errorHandler = require('./src/User/UserRoutes');
 
 const app=express();
 app.use(bodyParser.json());
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 
 
 app.use(globalRoutes);
+app.use(errorHandler);
 app.use(errorhandler);  
 
 
@@ -36,8 +38,7 @@ app.listen(config.Port,()=>{
     connect()
     deletereservations;
     console.log('listening from port '+config.Port);
-    let date=new Date();
-    console.log(date)
+    
 });
 
 

@@ -33,7 +33,7 @@ let loadedUser;
 
     const user=await User.findOne({email:email})
     if (!user){
-      throw {status:errorhandler['UserNotFound'].status , message: errorhandler['UserNotFound'].message}
+      throw {status:errorhandler['EmailMissing'].status , message: errorhandler['EmailMissing'].message}
     }
     loadedUser=user;
     const isEqual=await bcrypt.compare(password, user.password)
