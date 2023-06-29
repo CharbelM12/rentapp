@@ -9,13 +9,7 @@ const JoiValidation={
 
     signupvalidation:{
         body:Joi.object({
-            email:Joi.string().trim().email().normalize().custom(async (value, { req }) => {
-                const userDoc =await User.findOne({ email: value })
-                  if (userDoc) {
-                   throw {status:errorhandler['EmailExists'].status,message:errorhandler['EmailExists'].message};
-                  }
-                  return userDoc
-              }).required(),
+            email:Joi.string().trim().email().normalize().required(),
             password:Joi.string().trim().regex(/[a-zA-Z0-9]{5,30}/).required(),
             name:Joi.string().trim().required(),
             rentedcars:Joi.number()
@@ -41,15 +35,7 @@ const JoiValidation={
     },
     createorupdateBrandValidator:{
         body: Joi.object({
-            name:Joi.string().custom(async (value, { req }) => {
-                
-               const  brand =await Brand.findOne({ name: value })
-               if (brand){
-                    throw {status:errorhandler['NameExists'].status,message: errorhandler['NameExists'].message}
-               }
-               return brand
-                  
-              }).required(),
+            name:Joi.string().required(),
             Country:Joi.string().required(),
             foundedyear:Joi.number().min(1800).max(date.getFullYear()).required()
         })

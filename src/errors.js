@@ -1,8 +1,4 @@
 module.exports={
-    ValidationError:{
-        status:400,
-        message:"Validation Failed"
-    },
     EmailMissing:{
             status:401,
             message:"this Email address does not exist"

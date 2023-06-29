@@ -9,7 +9,10 @@ class UserService{
         const email=reqbody.email;
         const name=reqbody.name; 
         const password=reqbody.password;
-        
+        const userDoc =await User.findOne({ email: email })
+        if (userDoc) {
+         throw {status:errorhandler['EmailExists'].status,message:errorhandler['EmailExists'].message};
+        }
         const hashedPw=await bcrypt.hash(password, 12)
         
             const user= new User({
@@ -30,8 +33,7 @@ async login(reqbody){
 const email=reqbody.email;
 const password=reqbody.password;
 let loadedUser;
-
-    const user=await User.findOne({email:email})
+     const user=await User.findOne({email:email})
     if (!user){
       throw {status:errorhandler['EmailMissing'].status , message: errorhandler['EmailMissing'].message}
     }

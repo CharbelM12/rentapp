@@ -70,7 +70,7 @@ class CarService{
         }
     ])
     if (car && car.length >0){
-        return category[0]   
+        return car[0]   
     }else {
         throw {status:errorhandler['CarNotFound'].status , message: errorhandler['CarNotFound'].message}
     }    

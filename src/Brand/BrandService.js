@@ -14,6 +14,10 @@ class BrandService{
         const name=reqbody.name
         const Country=reqbody.Country
         const foundedyear =reqbody.foundedyear 
+        const  alreadyexists =await Brand.findOne({ name: name })
+        if (alreadyexists){
+             throw {status:errorhandler['NameExists'].status,message: errorhandler['NameExists'].message}
+        }
         const brand=new Brand({
             name:name,
             Country:Country,
