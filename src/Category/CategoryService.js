@@ -16,7 +16,11 @@ class CategoryService{
         const name=reqbody.name
         const description=reqbody.description
         const seatingcapacity =reqbody.seatingcapacity
-        const Brand=reqbody.Brand
+        const Brand=reqbody.Brand;
+        const  alreadyexists =await Category.findOne({ name: name })
+        if (alreadyexists){
+             throw {status:errorhandler['NameExists'].status,message: errorhandler['NameExists'].message}
+        }
         const category=new Category({
             name:name,
             description:description,

@@ -27,7 +27,7 @@ const JoiValidation={
 
     createorupdateCategoryValidator:{
         body: Joi.object({
-            name:Joi.string().required(),
+            name:Joi.string().pattern(/^[A-Z]/).required(),
             description:Joi.string().min(5).required(),
            seatingcapacity:Joi.number().min(2).required(),
            Brand:Joi.objectId().required()
@@ -35,7 +35,7 @@ const JoiValidation={
     },
     createorupdateBrandValidator:{
         body: Joi.object({
-            name:Joi.string().required(),
+            name:Joi.string().pattern(/^[A-Z]/).required(),
             Country:Joi.string().required(),
             foundedyear:Joi.number().min(1800).max(date.getFullYear()).required()
         })
